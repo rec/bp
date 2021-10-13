@@ -28,7 +28,7 @@ WARNING: No #!python executable found in %s, skipping .bat wrapper'"""
 
 printer = print  # noqa: T001
 
-SCRIPTS_TO_INSTALL = 'bp', 'bibliopixel', 'bp-color', 'bp-pid'
+SCRIPTS_TO_INSTALL = 'leds', 'bp-color', 'bp-pid'
 
 
 class InstallScripts(install_scripts):
@@ -105,23 +105,8 @@ def _get_version():
     return open(filename).read().strip()
 
 
-INSTALLATION_ERROR = """INSTALLATION ERROR!
-
-BiblioPixel v3 requires Python 3.4+ but
-you are using version {0.major}.{0.minor}.{0.micro}
-
-If you absolutely require using Python 2,
-please install BiblioPixel v2.x using:
-
-    > pip install "bibliopixel<3.0"
-
-However we highly recommend using the latest BiblioPixel
-(v3+) with Python 3.4+.
-"""
-
-
 if sys.version_info.major != 3:
-    printer(INSTALLATION_ERROR.format(sys.version_info))
+    printer('leds requires Python 3')
     sys.exit(1)
 
 VERSION = _get_version()
@@ -130,24 +115,24 @@ with open('requirements.txt') as f:
     REQUIRED = f.read().splitlines()
 
 setup(
-    name='BiblioPixel',
+    name='leds',
     version=VERSION,
     description=(
-        'BiblioPixel is a pure python library for manipulating a wide variety '
+        'leds is a pure python library for manipulating a wide variety '
         'of LED strip based displays, both in strip and matrix form.'),
     long_description=open('README.rst').read(),
-    author='Adam Haile',
-    author_email='adam@maniacallabs.com',
-    url='http://github.com/maniacallabs/bibliopixel/',
+    author='Tom Ritchford',
+    author_email='tom@swirly.com',
+    url='http://github.com/rec/leds/',
     license='MIT',
     packages=find_packages(exclude=['test']) + ['ui', 'scripts'],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
     ],
     tests_require=['pytest'],
     cmdclass={

@@ -6,7 +6,7 @@ __pycache__
 build
 dist
 MANIFEST
-BiblioPixel.egg*
+*.egg-info/
 
 # Dotfiles
 .DS_STORE
