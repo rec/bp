@@ -1,3 +1,6 @@
+## v3.5 - 2021-10-13
+- Rename BiblioPixel to bp
+
 ## v3.4.44 - 2019-01-10
 - Bump version number
 
