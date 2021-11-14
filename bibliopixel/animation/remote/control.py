@@ -138,8 +138,10 @@ class RemoteControl(wrapper.Indexed):
             self.q_recv
         )
 
-        self.server = multiprocessing.Process(target=server.run_server,
-                                              args=server_args)
+        self.server = multiprocessing.Process(
+            target=server.run_server,
+            args=server_args,
+            daemon=True)
         if self.open_page is not False:
             opener.opener('localhost', port, self.open_page)
 
