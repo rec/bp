@@ -6,5 +6,5 @@ def run_trigger(typename, q, events, kwargs):
     trigger = trigger_class(q, events, **kwargs)
     try:
         trigger.start()
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, SystemExit):
         pass

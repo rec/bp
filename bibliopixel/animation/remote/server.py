@@ -87,4 +87,7 @@ def run_server(external_access, port, q_send, q_recv):
     log.info(msg.format(port, host_ip))
 
     import werkzeug.serving
-    werkzeug.serving.run_simple(host_ip, port, server.app, threaded=True)
+    try:
+        werkzeug.serving.run_simple(host_ip, port, server.app, threaded=False)
+    except (KeyboardInterrupt, SystemExit):
+        return

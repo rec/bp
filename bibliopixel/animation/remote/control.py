@@ -169,7 +169,8 @@ class RemoteControl(wrapper.Indexed):
             events, kwargs = trigger
             self.trigger_procs[typename] = multiprocessing.Process(
                 target=trigger_process.run_trigger,
-                args=(typename, self.q_recv, events, kwargs))
+                args=(typename, self.q_recv, events, kwargs),
+                daemon=True)
 
         for a in self.animations:
             a.top_level = True
