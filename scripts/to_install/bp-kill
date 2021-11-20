@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+
+import subprocess
+import functools
+import sys
+
+run = functools.partial(
+    subprocess.run, text=True, capture_output=True, check=True
+)
+
+
+def main():
+    pids = list(_pids())
+    if pids:
+        run(('kill', '-9', *pids))
+        print('Killed', *pids)
+    else:
+        print('No pids')
+
+
+def _pids():
+    for line in run('ps -e'.split()).stdout.splitlines()[1:]:
+        parts = line.split()
+        pid, tty, time, *args = parts
+        assert pid.isnumeric(), pid
+
+        exe = args[0].split('/')[-1]
+        if exe.lower() == 'python' and len(args) > 1:
+            exe = args[1].split('/')[-1]
+        if exe == 'bp':
+            yield pid
+
+
+
+if __name__ == '__main__':
+    main()
