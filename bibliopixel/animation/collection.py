@@ -14,7 +14,10 @@ class Collection(animation.Animation):
 
     @staticmethod
     def pre_recursion(desc):
-        animations = desc['animations']
+        try:
+            animations = desc['animations']
+        except KeyError:
+            raise KeyError('No animations section found in project') from None
         animations = [_clean_animation(a, desc) for a in animations]
         _make_names_unique(animations)
         desc['animations'] = animations

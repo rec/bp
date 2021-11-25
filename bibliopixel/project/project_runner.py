@@ -171,6 +171,7 @@ def _get_projects(args):
                 log.printer(_dump(args, project.desc))
 
         except FileNotFoundError as e:
+            print('ONE')
             failed.append(('%s: %s' % (e.strerror, e.filename), ()))
 
         except Exception as exception:
@@ -191,11 +192,14 @@ def _get_projects(args):
 
     log.error(FAILURE_ERROR.format(
         count=len(failed), s='' if len(failed) == 1 else 's'))
+
     for msg, args in failed:
         if args:
+            args = [msg] + list(args)
             log.error('\n'.join(str(a) for a in args) + '\n')
         else:
             log.error(msg + '\n')
+
     raise ValueError('Run aborted')
 
 

@@ -39,11 +39,11 @@ USAGE = """Valid commands are:
 
 For help on each command, type
 
-    bp <command> --help
+    leds <command> --help
 
 or
 
-    bp <command> -h
+    leds <command> -h
 """
 
 

@@ -27,7 +27,7 @@ def _pids():
         exe = args[0].split('/')[-1]
         if exe.lower() == 'python' and len(args) > 1:
             exe = args[1].split('/')[-1]
-        if exe == 'bp':
+        if exe == 'leds':
             yield pid
 
 

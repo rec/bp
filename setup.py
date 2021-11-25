@@ -28,7 +28,7 @@ WARNING: No #!python executable found in %s, skipping .bat wrapper'"""
 
 printer = print  # noqa: T001
 
-SCRIPTS_TO_INSTALL = 'leds', 'bp-color', 'bp-pid'
+SCRIPTS_TO_INSTALL = 'leds', 'kill-leds'
 
 
 class InstallScripts(install_scripts):

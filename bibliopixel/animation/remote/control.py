@@ -22,9 +22,9 @@ It must be one of the configured animation names."""
 
 
 def normalize_name(name):
-    return ''.join('_' if e is ' ' else e
+    return ''.join('_' if e == ' ' else e
                    for e in name
-                   if e.isalnum() or e is ' ' or e is '_')
+                   if e.isalnum() or e == ' ' or e == '_')
 
 
 class RemoteControl(wrapper.Indexed):
