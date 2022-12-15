@@ -21,3 +21,6 @@ htmlcov
 doc/reference
 doctrees
 _doc
+
+.direnv/
+.envrc

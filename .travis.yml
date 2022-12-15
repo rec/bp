@@ -48,7 +48,7 @@ deploy:
 
 # Don't compile "experimental" branches starting with x-, y-, or z-.
 branches:
-  except:
+  only:
     - /^x-.*$/
     - /^y-.*$/
     - /^z-.*$/

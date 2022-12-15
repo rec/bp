@@ -25,7 +25,7 @@ def shutdown():
     return True
 
 
-def server(external_access, port, q_send, q_recv):
+def server(q_send, q_recv):
     app = flask.Flask('BP Remote', static_folder=STATIC_DIR)
 
     @app.route('/')
@@ -40,24 +40,24 @@ def server(external_access, port, q_send, q_recv):
 
     @app.route('/run_animation/<string:animation>')
     def run_animation(animation):
-        return self.api('run_animation', data=animation)
+        return api('run_animation', data=animation)
 
     @app.route('/stop')
     def stop_animation(self):
-        return self.api('stop_animation')
+        return api('stop_animation')
 
     @app.route('/api/<string:request>')
     @app.route('/api/<string:request>/<data>')
     def api(request, data=None):
         log.debug('api: %s, %s', request, data)
-        self.q_send.put({
+        q_send.put({
             'req': request.lower(),
             'data': data,
-            'sender': 'RemoteServer'}
+            'sender': 'RemoteServer',
         })
 
         try:
-            status, data = self.q_recv.get(timeout=5)
+            status, data = q_recv.get(timeout=5)
             msg = 'OK'
         except queue.Empty:
             status, data = False, None
